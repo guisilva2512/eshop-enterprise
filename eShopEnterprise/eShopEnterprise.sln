@@ -41,6 +41,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopEnterprise.WebApi.Core", "src\building blocks\eShopEnterprise.WebApi.Core\eShopEnterprise.WebApi.Core.csproj", "{B3182575-0377-4B93-9808-5D0852A8752E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", "{F0604BB5-D79B-4206-B4FA-9BBB2522C4B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopEnterprise.MessageBus", "src\building blocks\eShopEnterprise.MessageBus\eShopEnterprise.MessageBus.csproj", "{F5039094-53C1-4652-A129-C89BFAC45ED2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,10 @@ Global
 		{B3182575-0377-4B93-9808-5D0852A8752E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3182575-0377-4B93-9808-5D0852A8752E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3182575-0377-4B93-9808-5D0852A8752E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5039094-53C1-4652-A129-C89BFAC45ED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5039094-53C1-4652-A129-C89BFAC45ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5039094-53C1-4652-A129-C89BFAC45ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5039094-53C1-4652-A129-C89BFAC45ED2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +110,8 @@ Global
 		{087105FA-D439-4CF2-9CAE-B39DF0022EF2} = {1FEC1496-CE21-48A3-8132-C8DF0F6D7E97}
 		{6BD349B4-5EC4-459E-A097-EDC2738F0B65} = {603BEDDC-2C67-4DDE-A054-758F4D57BBA8}
 		{B3182575-0377-4B93-9808-5D0852A8752E} = {6BD349B4-5EC4-459E-A097-EDC2738F0B65}
+		{F0604BB5-D79B-4206-B4FA-9BBB2522C4B7} = {603BEDDC-2C67-4DDE-A054-758F4D57BBA8}
+		{F5039094-53C1-4652-A129-C89BFAC45ED2} = {F0604BB5-D79B-4206-B4FA-9BBB2522C4B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3E73E68-E03D-4E85-9716-CF20541D2C6F}
