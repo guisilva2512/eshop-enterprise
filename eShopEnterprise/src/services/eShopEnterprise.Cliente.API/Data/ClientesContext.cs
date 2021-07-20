@@ -57,8 +57,6 @@ namespace eShopEnterprise.Clientes.API.Data
     {
         public static async Task PublicarEventos<T>(this IMediatorHandler mediator, T ctx) where T : DbContext
         {
-            Console.WriteLine("Publicar Evento");
-
             var domainEntities = ctx.ChangeTracker
                 .Entries<Entity>()
                 .Where(x => x.Entity.Notificacoes != null && x.Entity.Notificacoes.Any());

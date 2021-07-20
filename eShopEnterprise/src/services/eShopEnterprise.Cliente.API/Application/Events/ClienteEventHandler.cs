@@ -10,8 +10,6 @@ namespace eShopEnterprise.Clientes.API.Application.Events
         public async Task Handle(ClienteRegistradoEvent notification, CancellationToken cancellationToken)
         {
             // TODO: Enviar e-mail de notificação
-
-            Console.WriteLine("Será enviado e-mail!");
         }
     }
 }

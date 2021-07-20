@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace eShopEnterprise.WebApi.Core.Controllers
 {
+    [ApiController]
     public abstract class MainController : Controller
     {
         protected ICollection<string> Erros = new List<string>();

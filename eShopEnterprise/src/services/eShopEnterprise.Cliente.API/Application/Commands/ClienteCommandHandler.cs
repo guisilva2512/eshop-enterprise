@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace eShopEnterprise.Clientes.API.Application.Commands
 {
-    public class ClienteCommandHandler : CommandHandler,
-        IRequestHandler<RegistrarClienteCommand, ValidationResult>
+    public class ClienteCommandHandler : CommandHandler, IRequestHandler<RegistrarClienteCommand, ValidationResult>
     {
         private readonly IClienteRepository _repository;
 
@@ -23,8 +22,6 @@ namespace eShopEnterprise.Clientes.API.Application.Commands
 
         public async Task<ValidationResult> Handle(RegistrarClienteCommand message, CancellationToken cancellationToken)
         {
-            Console.WriteLine("RegistrarClienteCommand");
-
             if (!message.IsValid()) return message.ValidationResult;
 
             var cliente = new Cliente(message.Id, message.Nome, message.Email, message.Cpf);

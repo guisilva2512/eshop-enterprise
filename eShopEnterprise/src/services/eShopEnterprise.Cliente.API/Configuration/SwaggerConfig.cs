@@ -13,8 +13,8 @@ namespace eShopEnterprise.Clientes.API.Configuration
             {
                 c.SwaggerDoc("clientes", new OpenApiInfo
                 {
-                    Title = "eShop Enterprise Catalogo API",
-                    Description = "Api de catalogo do grupo eShopEnterprise",
+                    Title = "eShop Enterprise Cliente API",
+                    Description = "Api de cliente do grupo eShopEnterprise",
                     Contact = new OpenApiContact()
                     {
                         Name = "Guilherme Silva",
