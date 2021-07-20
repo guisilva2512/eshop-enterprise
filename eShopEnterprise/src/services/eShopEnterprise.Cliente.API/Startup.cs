@@ -40,6 +40,8 @@ namespace eShopEnterprise.Clientes.API
             services.AddMediatR(typeof(Startup));
 
             services.RegisterService();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
