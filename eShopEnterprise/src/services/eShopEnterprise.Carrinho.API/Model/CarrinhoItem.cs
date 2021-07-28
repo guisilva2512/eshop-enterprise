@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using System;
+
 namespace eShopEnterprise.Carrinho.API.Model
 {
     public class CarrinhoItem
-    {       
-
+    {
         public CarrinhoItem()
         {
             Id = Guid.NewGuid();
@@ -62,7 +62,7 @@ namespace eShopEnterprise.Carrinho.API.Model
                    .WithMessage(item => $"A quantidade mínima para o item {item.Nome} é 1");
 
                 RuleFor(c => c.Quantidade)
-                   .LessThan(CarrinhoCliente.MAX_QUANTIDADE_ITEM)
+                   .LessThanOrEqualTo(CarrinhoCliente.MAX_QUANTIDADE_ITEM)
                    .WithMessage(item => $"A quantidade máxima para o item {item.Nome} é {CarrinhoCliente.MAX_QUANTIDADE_ITEM}");
 
                 RuleFor(c => c.Valor)

@@ -43,7 +43,6 @@ namespace eShopEnterprise.Carrinho.API.Controllers
                 ManipularCarrinhoExistente(carrinho, item);
             }
 
-            ValidarCarrinho(carrinho);
             if (!OperacaoValida()) return CustomResponse();
 
             await PersistirDados();
@@ -101,7 +100,10 @@ namespace eShopEnterprise.Carrinho.API.Controllers
         private void ManipularNovoCarrinho(CarrinhoItem item)
         {
             var carrinho = new CarrinhoCliente(_user.ObterUserId());
+            
             carrinho.AdicionarItem(item);
+
+            ValidarCarrinho(carrinho);
 
             _context.CarrinhoCliente.Add(carrinho);
         }
@@ -111,6 +113,8 @@ namespace eShopEnterprise.Carrinho.API.Controllers
             carrinho.AdicionarItem(item);
 
             var produtoItemExistente = carrinho.CarrinhoItemExistente(item);
+
+            ValidarCarrinho(carrinho);
 
             if (produtoItemExistente)
             {
