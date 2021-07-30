@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using eShopEnterprise.Core.Communication;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
@@ -42,6 +43,17 @@ namespace eShopEnterprise.WebApi.Core.Controllers
             foreach (var erro in validationResult.Errors)
             {
                 AdicionarErrorProcessamento(erro.ErrorMessage);
+            }
+
+            return CustomResponse();
+        }
+
+        protected ActionResult CustomResponse(ResponseResult responseResult)
+        {
+
+            foreach (var mensagem in responseResult.Erros.Mensagens)
+            {
+                AdicionarErrorProcessamento(mensagem);
             }
 
             return CustomResponse();

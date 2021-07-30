@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using eShopEnterprise.Core.Communication;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -31,6 +29,11 @@ namespace eShopEnterprise.Bff.Compras.Services
 
             response.EnsureSuccessStatusCode();
             return true;
+        }
+
+        protected ResponseResult RetornoOk()
+        {
+            return new ResponseResult();
         }
     }
 }
