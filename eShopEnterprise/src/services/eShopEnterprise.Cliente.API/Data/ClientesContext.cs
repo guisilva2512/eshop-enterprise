@@ -7,7 +7,6 @@ using eShopEnterprise.Core.Mediator;
 using eShopEnterprise.Core.DomainObjects;
 using FluentValidation.Results;
 using eShopEnterprise.Core.Messages;
-using System;
 
 namespace eShopEnterprise.Clientes.API.Data
 {
