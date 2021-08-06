@@ -31,7 +31,7 @@ namespace eShopEnterprise.WebApi.Core.Controllers
 
             foreach (var erro in erros)
             {
-                AdicionarErrorProcessamento(erro.ErrorMessage);
+                AdicionarErroProcessamento(erro.ErrorMessage);
             }
 
             return CustomResponse();
@@ -42,7 +42,7 @@ namespace eShopEnterprise.WebApi.Core.Controllers
 
             foreach (var erro in validationResult.Errors)
             {
-                AdicionarErrorProcessamento(erro.ErrorMessage);
+                AdicionarErroProcessamento(erro.ErrorMessage);
             }
 
             return CustomResponse();
@@ -53,13 +53,13 @@ namespace eShopEnterprise.WebApi.Core.Controllers
 
             foreach (var mensagem in responseResult.Erros.Mensagens)
             {
-                AdicionarErrorProcessamento(mensagem);
+                AdicionarErroProcessamento(mensagem);
             }
 
             return CustomResponse();
         }
 
-        protected void AdicionarErrorProcessamento(string erro)
+        protected void AdicionarErroProcessamento(string erro)
         {
             Erros.Add(erro);
         }

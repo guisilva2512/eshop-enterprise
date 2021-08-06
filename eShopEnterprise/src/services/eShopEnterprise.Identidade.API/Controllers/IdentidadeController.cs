@@ -66,7 +66,7 @@ namespace eShopEnterprise.Identidade.API.Controllers
 
             foreach (var error in result.Errors)
             {
-                AdicionarErrorProcessamento(error.Description);
+                AdicionarErroProcessamento(error.Description);
             }
 
             return CustomResponse();
@@ -86,11 +86,11 @@ namespace eShopEnterprise.Identidade.API.Controllers
 
             if (result.IsLockedOut)
             {
-                AdicionarErrorProcessamento("Usuário temporariamente bloqueado por tentativas inválias");
+                AdicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválias");
                 return CustomResponse();
             }
 
-            AdicionarErrorProcessamento("Usuário ou senha inválidos");
+            AdicionarErroProcessamento("Usuário ou senha inválidos");
             return CustomResponse();
         }
 
@@ -170,7 +170,7 @@ namespace eShopEnterprise.Identidade.API.Controllers
             {
                 return await _bus.RequestAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(usuarioRegistrado);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 await _userManager.DeleteAsync(usuario);
                 throw;

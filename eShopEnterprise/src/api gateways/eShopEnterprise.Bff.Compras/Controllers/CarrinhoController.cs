@@ -12,11 +12,13 @@ namespace eShopEnterprise.Bff.Compras.Controllers
     {
         private readonly ICarrinhoService _carrinhoService;
         private readonly ICatalogoService _catalogoService;
+        private readonly IPedidoService _pedidoService;
 
-        public CarrinhoController(ICarrinhoService carrinhoService, ICatalogoService catalogoService)
+        public CarrinhoController(ICarrinhoService carrinhoService, ICatalogoService catalogoService, IPedidoService pedidoService)
         {
             _carrinhoService = carrinhoService;
             _catalogoService = catalogoService;
+            _pedidoService = pedidoService;
         }
 
         [HttpGet]
@@ -74,7 +76,7 @@ namespace eShopEnterprise.Bff.Compras.Controllers
 
             if (produto == null)
             {
-                AdicionarErrorProcessamento("Produto inválido");
+                AdicionarErroProcessamento("Produto inválido");
                 return CustomResponse();
             }
 
@@ -83,21 +85,37 @@ namespace eShopEnterprise.Bff.Compras.Controllers
             return CustomResponse(resposta);
         }
 
+        [HttpPost]
+        [Route("compras/carrinho/aplicar-voucher")]
+        public async Task<IActionResult> AplicarVoucher([FromBody] string voucherCodigo)
+        {
+            var voucher = await _pedidoService.ObterVoucherPorCodigo(voucherCodigo);
+            if (voucher is null)
+            {
+                AdicionarErroProcessamento("Voucher inválido ou não encontrado!");
+                return CustomResponse();
+            }
+
+            var resposta = await _carrinhoService.AplicarVoucherCarrinho(voucher);
+
+            return CustomResponse(resposta);
+        }
+
         private async Task ValidarItemCarrinho(ItemProdutoDTO produto, int quantidade)
         {
-            if (produto == null) AdicionarErrorProcessamento("Produto inexistente!");
-            if (quantidade < 1) AdicionarErrorProcessamento("Escolha ao menos uma unidade!");
+            if (produto == null) AdicionarErroProcessamento("Produto inexistente!");
+            if (quantidade < 1) AdicionarErroProcessamento("Escolha ao menos uma unidade!");
 
             var carrinho = await _carrinhoService.ObterCarrinho();
             var itemCarrinho = carrinho.Itens.FirstOrDefault(i => i.ProdutoId == produto.Id);
 
             if (itemCarrinho != null && itemCarrinho.Quantidade + quantidade > produto.QuantidadeEstoque)
             {
-                AdicionarErrorProcessamento($"O produto {produto.Nome} possui {produto.QuantidadeEstoque} unidades em estoque, você selecionou {quantidade}");
+                AdicionarErroProcessamento($"O produto {produto.Nome} possui {produto.QuantidadeEstoque} unidades em estoque, você selecionou {quantidade}");
                 return;
             }
 
-            if (quantidade > produto.QuantidadeEstoque) AdicionarErrorProcessamento($"O produto {produto.Nome} possui {produto.QuantidadeEstoque} unidades em estoque, você selecionou {quantidade}");
+            if (quantidade > produto.QuantidadeEstoque) AdicionarErroProcessamento($"O produto {produto.Nome} possui {produto.QuantidadeEstoque} unidades em estoque, você selecionou {quantidade}");
         }
     }
 }

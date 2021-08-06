@@ -13,7 +13,7 @@ namespace eShopEnterprise.Bff.Compras.Services
             return new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
         }
 
-        protected async Task<T> DesserializarObjetoResponse<T>(HttpResponseMessage response)
+        protected async Task<T> DeserializarObjetoResponse<T>(HttpResponseMessage response)
         {
             var options = new JsonSerializerOptions
             {

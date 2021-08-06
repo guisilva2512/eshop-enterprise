@@ -30,7 +30,7 @@ namespace eShopEnterprise.Bff.Compras.Services
 
             TratarErrosResponse(response);
 
-            return await DesserializarObjetoResponse<ItemProdutoDTO>(response);
+            return await DeserializarObjetoResponse<ItemProdutoDTO>(response);
         }
     }
 }

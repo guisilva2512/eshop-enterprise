@@ -90,6 +90,20 @@ namespace eShopEnterprise.Carrinho.API.Controllers
             return CustomResponse();
         }
 
+        [HttpPost]
+        [Route("carrinho/aplicar-voucher")]
+        public async Task<IActionResult> AplicarVoucher(Voucher voucher)
+        {
+            var carrinho = await ObterCarrinhoCliente();
+
+            carrinho.AplicarVoucher(voucher);
+
+            _context.CarrinhoCliente.Update(carrinho);
+
+            await PersistirDados();
+            return CustomResponse();
+        }
+
         private async Task<CarrinhoCliente> ObterCarrinhoCliente()
         {
             return await _context.CarrinhoCliente
@@ -132,13 +146,13 @@ namespace eShopEnterprise.Carrinho.API.Controllers
         {
             if (item != null && produtoId != item.ProdutoId)
             {
-                AdicionarErrorProcessamento("O item não corresponde ao informado");
+                AdicionarErroProcessamento("O item não corresponde ao informado");
                 return null;
             }
 
             if (carrinho == null)
             {
-                AdicionarErrorProcessamento("Carrinho não encontrado");
+                AdicionarErroProcessamento("Carrinho não encontrado");
                 return null;
             }
 
@@ -146,7 +160,7 @@ namespace eShopEnterprise.Carrinho.API.Controllers
 
             if (itemCarrinho == null || !carrinho.CarrinhoItemExistente(itemCarrinho))
             {
-                AdicionarErrorProcessamento("O item não está no carrinho");
+                AdicionarErroProcessamento("O item não está no carrinho");
                 return null;
             }
 
@@ -156,14 +170,14 @@ namespace eShopEnterprise.Carrinho.API.Controllers
         private async Task PersistirDados()
         {
             var result = await _context.SaveChangesAsync();
-            if (result <= 0) AdicionarErrorProcessamento("Não foi possível persistir os dados no banco");
+            if (result <= 0) AdicionarErroProcessamento("Não foi possível persistir os dados no banco");
         }
 
         private bool ValidarCarrinho(CarrinhoCliente carrinho)
         {
             if (carrinho.EhValido()) return true;
 
-            carrinho.ValidationResult.Errors.ToList().ForEach(e => AdicionarErrorProcessamento(e.ErrorMessage));
+            carrinho.ValidationResult.Errors.ToList().ForEach(e => AdicionarErroProcessamento(e.ErrorMessage));
             return false;
         }
     }
