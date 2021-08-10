@@ -1,5 +1,6 @@
 ﻿using eShopEnterprise.Core.Mediator;
 using eShopEnterprise.Pedidos.API.Application.Queries;
+using eShopEnterprise.Pedidos.Domain.Pedidos;
 using eShopEnterprise.Pedidos.Domain.Vouchers;
 using eShopEnterprise.Pedidos.Infra.Data;
 using eShopEnterprise.Pedidos.Infra.Data.Repository;
@@ -28,8 +29,8 @@ namespace eShopEnterprise.Pedidos.API.Configuration
             services.AddScoped<IVoucherQueries, VoucherQueries>();
             //services.AddScoped<IPedidoQueries, PedidoQueries>();
 
-            //// Data
-            //services.AddScoped<IPedidoRepository, PedidoRepository>();
+            // Data
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IVoucherRepository, VoucherRepository>();
             services.AddScoped<PedidosContext>();
         }

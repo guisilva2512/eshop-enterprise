@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Mappings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\building blocks\eShopEnterprise.Core\eShopEnterprise.Core.csproj" />
     <ProjectReference Include="..\eShopEnterprise.Pedidos.Domain\eShopEnterprise.Pedidos.Domain.csproj" />
   </ItemGroup>
