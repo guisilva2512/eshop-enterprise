@@ -3,6 +3,7 @@ using eShopEnterprise.Pedidos.API.Application.DTO;
 using eShopEnterprise.Pedidos.API.Application.Events;
 using eShopEnterprise.Pedidos.Domain.Pedidos;
 using eShopEnterprise.Pedidos.Domain.Vouchers;
+using eShopEnterprise.Pedidos.Domain.Vouchers.Specs;
 using FluentValidation.Results;
 using MediatR;
 using System;

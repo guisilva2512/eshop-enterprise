@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentValidation.Results;
 
-namespace eShopEnterprise.Core.Specification
+namespace eShopEnterprise.Core.Specification.Validation
 {
     public class SpecValidator<T>
     {

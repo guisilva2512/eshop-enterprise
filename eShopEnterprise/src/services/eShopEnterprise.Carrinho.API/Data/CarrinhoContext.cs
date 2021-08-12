@@ -57,7 +57,7 @@ namespace eShopEnterprise.Carrinho.API.Data
 
             foreach (var relationShip in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
-                relationShip.DeleteBehavior = DeleteBehavior.ClientSetNull;
+                relationShip.DeleteBehavior = DeleteBehavior.Cascade;
             }
         }
     }

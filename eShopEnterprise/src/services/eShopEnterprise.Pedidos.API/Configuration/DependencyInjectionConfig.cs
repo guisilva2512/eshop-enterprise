@@ -1,10 +1,13 @@
 ﻿using eShopEnterprise.Core.Mediator;
+using eShopEnterprise.Pedidos.API.Application.Commands;
 using eShopEnterprise.Pedidos.API.Application.Queries;
 using eShopEnterprise.Pedidos.Domain.Pedidos;
 using eShopEnterprise.Pedidos.Domain.Vouchers;
 using eShopEnterprise.Pedidos.Infra.Data;
 using eShopEnterprise.Pedidos.Infra.Data.Repository;
 using eShopEnterprise.WebApi.Core.Usuario;
+using FluentValidation.Results;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,8 +21,8 @@ namespace eShopEnterprise.Pedidos.API.Configuration
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAspNetUser, AspNetUser>();
 
-            //// Commands
-            //services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
+            // Commands
+            services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
 
             //// Events
             //services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
@@ -27,7 +30,7 @@ namespace eShopEnterprise.Pedidos.API.Configuration
             // Application
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IVoucherQueries, VoucherQueries>();
-            //services.AddScoped<IPedidoQueries, PedidoQueries>();
+            services.AddScoped<IPedidoQueries, PedidoQueries>();
 
             // Data
             services.AddScoped<IPedidoRepository, PedidoRepository>();

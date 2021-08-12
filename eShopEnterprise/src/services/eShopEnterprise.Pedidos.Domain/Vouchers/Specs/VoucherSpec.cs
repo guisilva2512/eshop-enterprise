@@ -1,4 +1,5 @@
 ﻿using eShopEnterprise.Core.Specification;
+using eShopEnterprise.Core.Specification.Validation;
 using System;
 using System.Linq.Expressions;
 

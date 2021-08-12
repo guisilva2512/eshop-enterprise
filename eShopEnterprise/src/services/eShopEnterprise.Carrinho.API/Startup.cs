@@ -37,6 +37,8 @@ namespace eShopEnterprise.Carrinho.API
             services.AddSwaggerConfiguration();
 
             services.RegisterService();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

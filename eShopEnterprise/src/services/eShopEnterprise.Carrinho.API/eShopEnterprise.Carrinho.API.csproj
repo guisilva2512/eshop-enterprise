@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\eShopEnterprise.MessageBus\eShopEnterprise.MessageBus.csproj" />
     <ProjectReference Include="..\..\building blocks\eShopEnterprise.WebApi.Core\eShopEnterprise.WebApi.Core.csproj" />
   </ItemGroup>
 
