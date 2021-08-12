@@ -1,5 +1,6 @@
 ﻿using eShopEnterprise.Core.Mediator;
 using eShopEnterprise.Pedidos.API.Application.Commands;
+using eShopEnterprise.Pedidos.API.Application.Events;
 using eShopEnterprise.Pedidos.API.Application.Queries;
 using eShopEnterprise.Pedidos.Domain.Pedidos;
 using eShopEnterprise.Pedidos.Domain.Vouchers;
@@ -17,15 +18,15 @@ namespace eShopEnterprise.Pedidos.API.Configuration
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            //// API
+            // API
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAspNetUser, AspNetUser>();
 
             // Commands
             services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
 
-            //// Events
-            //services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
+            // Events
+            services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
 
             // Application
             services.AddScoped<IMediatorHandler, MediatorHandler>();
