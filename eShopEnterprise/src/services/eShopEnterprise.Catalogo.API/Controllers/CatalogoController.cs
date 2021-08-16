@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace eShopEnterprise.Catalogo.API.Controllers
 {
     [Authorize]
-    public class ProdutoController : MainController
+    public class CatalogoController : MainController
     {
         private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutoController(IProdutoRepository produtoRepository)
+        public CatalogoController(IProdutoRepository produtoRepository)
         {
             _produtoRepository = produtoRepository;
         }
@@ -31,6 +31,12 @@ namespace eShopEnterprise.Catalogo.API.Controllers
         public async Task<Produto> ObterPorId(Guid id)
         {
             return await _produtoRepository.ObterPorId(id);
+        }
+
+        [HttpGet("catalogo/produtos/lista/{ids}")]
+        public async Task<IEnumerable<Produto>> ObterProdutosPorId(string ids)
+        {
+            return await _produtoRepository.ObterProdutosPorId(ids);
         }
     }
 }

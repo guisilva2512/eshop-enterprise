@@ -8,7 +8,7 @@ namespace eShopEnterprise.Clientes.API.Models
         // EF Relational
         protected Endereco() { }
 
-        public Endereco(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public Endereco(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado, Guid clienteId)
         {
             Logradouro = logradouro;
             Numero = numero;
@@ -17,6 +17,7 @@ namespace eShopEnterprise.Clientes.API.Models
             Cep = cep;
             Cidade = cidade;
             Estado = estado;
+            ClienteId = clienteId;
         }
 
         public string Logradouro { get; private set; }

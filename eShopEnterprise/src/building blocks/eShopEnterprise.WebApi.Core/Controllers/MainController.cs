@@ -59,6 +59,18 @@ namespace eShopEnterprise.WebApi.Core.Controllers
             return CustomResponse();
         }
 
+        protected bool ResponsePossuiErros(ResponseResult resposta)
+        {
+            if (resposta == null || !resposta.Erros.Mensagens.Any()) return false;
+
+            foreach (var mensagem in resposta.Erros.Mensagens)
+            {
+                AdicionarErroProcessamento(mensagem);
+            }
+
+            return true;
+        }
+
         protected void AdicionarErroProcessamento(string erro)
         {
             Erros.Add(erro);

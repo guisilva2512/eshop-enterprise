@@ -1,6 +1,7 @@
 ﻿using eShopEnterprise.Clientes.API.Models;
 using eShopEnterprise.Core.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,6 +31,18 @@ namespace eShopEnterprise.Clientes.API.Data.Repository
         public async Task<IEnumerable<Cliente>> ObterTodos()
         {
             return await _context.Clientes.AsNoTracking().ToListAsync();
+        }
+
+
+        public async Task<Endereco> ObterEnderecoPorId(Guid id)
+        {
+            return await _context.Enderecos.FirstOrDefaultAsync(e => e.ClienteId == id);
+        }
+
+        public void AdicionarEndereco(Endereco endereco)
+        {
+            _context.Enderecos.Add(endereco);
+
         }
 
         public void Dispose()
