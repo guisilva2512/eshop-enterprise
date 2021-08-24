@@ -1,0 +1,5 @@
+não espera resultado
+await _bus.PublishAsync(new PedidoRealizadoIntegrationEvent(message.ClienteId));
+
+espera resultado
+return await _bus.RequestAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(usuarioRegistrado);

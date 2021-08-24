@@ -1,10 +1,10 @@
-﻿using eShopEnterprise.Core.Utils;
+﻿using eShopEnterprise.Catalogo.API.Services;
+using eShopEnterprise.Core.Utils;
 using eShopEnterprise.MessageBus;
-using eShopEnterprise.Pagamento.API.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace eShopEnterprise.Pagamento.API.Configuration
+namespace eShopEnterprise.Catalogo.API.Configuration
 {
     public static class MessageBusConfig
     {
@@ -12,7 +12,7 @@ namespace eShopEnterprise.Pagamento.API.Configuration
             IConfiguration configuration)
         {
             services.AddMessageBus(configuration.GetMessageQueueConnection("MessageBus"))
-                .AddHostedService<PagamentoIntegrationHandler>();
+                .AddHostedService<CatalogoIntegrationHandler>();
         }
     }
 }
