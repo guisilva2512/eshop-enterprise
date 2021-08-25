@@ -10,7 +10,7 @@ namespace eShopEnterprise.Identidade.API.Configuration
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("identidade", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "eShop Enterprise Identity API",
                     Description = "Api de autenticação e autorização do grupo eShopEnterprise",
@@ -35,7 +35,7 @@ namespace eShopEnterprise.Identidade.API.Configuration
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/identidade/swagger.json", "identidade");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "identidade");
             });
 
             return app;

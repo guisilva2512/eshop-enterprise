@@ -11,7 +11,7 @@ namespace eShopEnterprise.Catalogo.API.Configuration
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("catalogo", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "eShop Enterprise Catalogo API",
                     Description = "Api de catalogo do grupo eShopEnterprise",
@@ -61,7 +61,7 @@ namespace eShopEnterprise.Catalogo.API.Configuration
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/catalogo/swagger.json", "catalogo");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "catalogo");
             });
 
             return app;

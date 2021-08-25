@@ -11,7 +11,7 @@ namespace eShopEnterprise.Carrinho.API.Configuration
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("clientes", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "eShop Enterprise Carrinho API",
                     Description = "Api de carrinho do grupo eShopEnterprise",
@@ -61,7 +61,7 @@ namespace eShopEnterprise.Carrinho.API.Configuration
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/carrinho/swagger.json", "carrinho");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "carrinho");
             });
 
             return app;

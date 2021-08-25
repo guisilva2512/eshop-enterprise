@@ -47,20 +47,28 @@ namespace eShopEnterprise.Pagamento.API.Services
 
         private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
-            using var scope = _serviceProvider.CreateScope();
-            var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
-            var pagamento = new Models.Pagamento
+            try
             {
-                PedidoId = message.PedidoId,
-                TipoPagamento = (TipoPagamento)message.TipoPagamento,
-                Valor = message.Valor,
-                CartaoCredito = new CartaoCredito(
-                    message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
-            };
+                using var scope = _serviceProvider.CreateScope();
+                var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
+                var pagamento = new Models.Pagamento
+                {
+                    PedidoId = message.PedidoId,
+                    TipoPagamento = (TipoPagamento)message.TipoPagamento,
+                    Valor = message.Valor,
+                    CartaoCredito = new CartaoCredito(
+                        message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
+                };
 
-            var response = await pagamentoService.AutorizarPagamento(pagamento);
+                var response = await pagamentoService.AutorizarPagamento(pagamento);
 
-            return response;
+                return response;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         private async Task CancelarPagamento(PedidoCanceladoIntegrationEvent message)

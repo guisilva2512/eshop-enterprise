@@ -7,24 +7,16 @@ namespace eShopEnterprise.Clientes.API.Configuration
 {
     public static class SwaggerConfig
     {
-        public static IServiceCollection AddSwaggerConfiguration(this IServiceCollection services)
+        public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("clientes", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "eShop Enterprise Cliente API",
-                    Description = "Api de cliente do grupo eShopEnterprise",
-                    Contact = new OpenApiContact()
-                    {
-                        Name = "Guilherme Silva",
-                        Email = "guisilva2512@gmail.com"
-                    },
-                    License = new OpenApiLicense()
-                    {
-                        Name = "MIT",
-                        Url = new Uri("https://opensource.org/licenses/MIT")
-                    }
+                    Title = "eShop Enterprise Clientes API",
+                    Description = "eShop Enterprise Clientes API",
+                    Contact = new OpenApiContact() { Name = "Guilherme Silva", Email = "guisilva2512@gmail.com" },
+                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -48,23 +40,20 @@ namespace eShopEnterprise.Clientes.API.Configuration
                                 Id = "Bearer"
                             }
                         },
-                        new string [] {}
+                        new string[] {}
                     }
                 });
-            });
 
-            return services;
+            });
         }
 
-        public static IApplicationBuilder UseSwaggerConfiguration(this IApplicationBuilder app)
+        public static void UseSwaggerConfiguration(this IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/clientes/swagger.json", "clientes");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
-
-            return app;
         }
     }
 }
