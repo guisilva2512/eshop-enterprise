@@ -7,6 +7,7 @@ namespace eShopEnterprise.Catalogo.API.Models
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
+        Task<PagedResult<Produto>> ObterTodos(int pageSize, int pageIndex, string query = null);
         Task<IEnumerable<Produto>> ObterTodos();
         Task<Produto> ObterPorId(Guid id);
         Task<List<Produto>> ObterProdutosPorId(string ids);
