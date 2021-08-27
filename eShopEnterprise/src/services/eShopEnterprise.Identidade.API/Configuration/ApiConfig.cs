@@ -1,8 +1,10 @@
 ﻿using eShopEnterprise.WebApi.Core.Identidade;
+using eShopEnterprise.WebApi.Core.Usuario;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NetDevPack.Security.Jwt.AspNetCore;
 
 namespace eShopEnterprise.Identidade.API.Configuration
 {
@@ -11,6 +13,8 @@ namespace eShopEnterprise.Identidade.API.Configuration
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
             return services;
         }
@@ -32,6 +36,8 @@ namespace eShopEnterprise.Identidade.API.Configuration
             {
                 endpoints.MapControllers();
             });
+
+            app.UseJwksDiscovery();
 
             return app;
         }

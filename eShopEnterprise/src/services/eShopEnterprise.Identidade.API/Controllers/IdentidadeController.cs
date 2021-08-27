@@ -3,10 +3,12 @@ using eShopEnterprise.Identidade.API.Models;
 using eShopEnterprise.MessageBus;
 using eShopEnterprise.WebApi.Core.Controllers;
 using eShopEnterprise.WebApi.Core.Identidade;
+using eShopEnterprise.WebApi.Core.Usuario;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using NetDevPack.Security.Jwt.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -25,16 +27,24 @@ namespace eShopEnterprise.Identidade.API.Controllers
         private readonly AppSettings _appSettings;
         private readonly IMessageBus _bus;
 
+        private readonly IJsonWebKeySetService _jwksService;
+        private readonly IAspNetUser _aspNetUser;
+
         public IdentidadeController(
                 SignInManager<IdentityUser> signInManager, 
                 UserManager<IdentityUser> userManager, 
                 IOptions<AppSettings> appSettings,
-                IMessageBus bus)
+                IMessageBus bus,
+                IJsonWebKeySetService jwksService,
+                IAspNetUser aspNetUser)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
             _bus = bus;
+
+            _jwksService = jwksService;
+            _aspNetUser = aspNetUser;
         }
 
         [HttpPost("nova-conta")]
@@ -110,7 +120,8 @@ namespace eShopEnterprise.Identidade.API.Controllers
             return new UsuarioRespostaLogin
             {
                 AccessToken = encodedToken,
-                ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
+                //ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
+                ExpiresIn = TimeSpan.FromHours(1).TotalSeconds,
                 UsuarioToken = new UsuarioToken
                 {
                     Id = user.Id,
@@ -123,15 +134,21 @@ namespace eShopEnterprise.Identidade.API.Controllers
         private string CodificarToken(ClaimsIdentity identityClaims)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var currentIssuer =
+                $"{_aspNetUser.ObterHttpContext().Request.Scheme}://{_aspNetUser.ObterHttpContext().Request.Host}";
+            var key = _jwksService.GenerateSigningCredentials();
+            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
             var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
             {
-                Issuer = _appSettings.Emissor,
-                Audience = _appSettings.ValidoEm,
+                //Issuer = _appSettings.Emissor,
+                Issuer = currentIssuer,
+                //Audience = _appSettings.ValidoEm,
                 Subject = identityClaims,
-                Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                //Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras),
+                Expires = DateTime.UtcNow.AddHours(1),
+                //SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = key
             });
 
             var encodedToken = tokenHandler.WriteToken(token);
