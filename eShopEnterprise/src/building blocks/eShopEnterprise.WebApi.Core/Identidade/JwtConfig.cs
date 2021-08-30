@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using eShopEnterprise.JwtExtensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetDevPack.Security.JwtExtensions;
+//using NetDevPack.Security.JwtExtensions;
 
 namespace eShopEnterprise.WebApi.Core.Identidade
 {
@@ -36,7 +37,7 @@ namespace eShopEnterprise.WebApi.Core.Identidade
                 //    //ValidIssuers
                 //    ValidIssuer = appSettings.Emissor
                 //};
-                bearerOptions.SetJwksOptions(new JwkOptions(appSettings.AutenticacaoJwksUrl));
+                bearerOptions.SetJwksOptions(new JwkOptions(appSettings.AutenticacaoJwksUrl)); // building blocks\eShopEnterprise.JwtExtensions\JwksExtension.cs
             });
 
             return services;

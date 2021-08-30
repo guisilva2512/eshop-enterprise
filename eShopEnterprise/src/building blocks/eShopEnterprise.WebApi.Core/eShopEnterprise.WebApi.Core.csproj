@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\eShopEnterprise.Core\eShopEnterprise.Core.csproj" />
+    <ProjectReference Include="..\eShopEnterprise.JwtExtensions\eShopEnterprise.JwtExtensions.csproj" />
   </ItemGroup>
   
 </Project>

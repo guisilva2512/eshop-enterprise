@@ -28,6 +28,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\eShopEnterprise.Core\eShopEnterprise.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\eShopEnterprise.Jwt.AspNetCore\eShopEnterprise.Jwt.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\building blocks\eShopEnterprise.Jwt.Store.EntityFrameworkCore\eShopEnterprise.Jwt.Store.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\building blocks\eShopEnterprise.Jwt\eShopEnterprise.Jwt.csproj" />
     <ProjectReference Include="..\..\building blocks\eShopEnterprise.MessageBus\eShopEnterprise.MessageBus.csproj" />
     <ProjectReference Include="..\..\building blocks\eShopEnterprise.WebApi.Core\eShopEnterprise.WebApi.Core.csproj" />
   </ItemGroup>

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using eShopEnterprise.Jwt.Model;
+using eShopEnterprise.Jwt.Store.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NetDevPack.Security.Jwt.Model;
-using NetDevPack.Security.Jwt.Store.EntityFrameworkCore;
+//using NetDevPack.Security.Jwt.Model;
+//using NetDevPack.Security.Jwt.Store.EntityFrameworkCore;
 
 namespace eShopEnterprise.Identidade.API.Data
 {

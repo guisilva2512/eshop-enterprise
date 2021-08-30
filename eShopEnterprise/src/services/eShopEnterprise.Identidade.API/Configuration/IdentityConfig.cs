@@ -1,12 +1,14 @@
 ﻿using eShopEnterprise.Identidade.API.Data;
 using eShopEnterprise.Identidade.API.Extensions;
-using eShopEnterprise.WebApi.Core.Identidade;
+using eShopEnterprise.Jwt;
+using eShopEnterprise.Jwt.Store.EntityFrameworkCore;
+//using eShopEnterprise.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetDevPack.Security.Jwt;
-using NetDevPack.Security.Jwt.Store.EntityFrameworkCore;
+//using NetDevPack.Security.Jwt;
+//using NetDevPack.Security.Jwt.Store.EntityFrameworkCore;
 
 namespace eShopEnterprise.Identidade.API.Configuration
 {
@@ -15,7 +17,7 @@ namespace eShopEnterprise.Identidade.API.Configuration
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddJwksManager(options => options.Jws = JwsAlgorithm.ES256)
-                .PersistKeysToDatabaseStore<ApplicationDbContext>();
+                .PersistKeysToDatabaseStore<ApplicationDbContext>(); //building blocks\eShopEnterprise.Jwt\JsonWebKeySetManagerDependencyInjection.cs
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
 

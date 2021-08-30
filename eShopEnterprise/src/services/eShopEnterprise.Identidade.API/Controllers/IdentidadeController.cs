@@ -1,5 +1,6 @@
 ﻿using eShopEnterprise.Core.Messages.Integration;
 using eShopEnterprise.Identidade.API.Models;
+using eShopEnterprise.Jwt.Interfaces;
 using eShopEnterprise.MessageBus;
 using eShopEnterprise.WebApi.Core.Controllers;
 using eShopEnterprise.WebApi.Core.Identidade;
@@ -8,13 +9,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using NetDevPack.Security.Jwt.Interfaces;
+//using NetDevPack.Security.Jwt.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eShopEnterprise.Identidade.API.Controllers
@@ -134,9 +134,8 @@ namespace eShopEnterprise.Identidade.API.Controllers
         private string CodificarToken(ClaimsIdentity identityClaims)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var currentIssuer =
-                $"{_aspNetUser.ObterHttpContext().Request.Scheme}://{_aspNetUser.ObterHttpContext().Request.Host}";
-            var key = _jwksService.GenerateSigningCredentials();
+            var currentIssuer = $"{_aspNetUser.ObterHttpContext().Request.Scheme}://{_aspNetUser.ObterHttpContext().Request.Host}";
+            var key = _jwksService.GenerateSigningCredentials(); //building blocks\eShopEnterprise.Jwt\Jwks\JwksService.cs
             //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
             var token = tokenHandler.CreateToken(new SecurityTokenDescriptor

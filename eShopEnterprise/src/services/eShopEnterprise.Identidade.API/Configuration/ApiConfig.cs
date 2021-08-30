@@ -1,10 +1,11 @@
-﻿using eShopEnterprise.WebApi.Core.Identidade;
+﻿using eShopEnterprise.Jwt.AspNetCore;
+using eShopEnterprise.WebApi.Core.Identidade;
 using eShopEnterprise.WebApi.Core.Usuario;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NetDevPack.Security.Jwt.AspNetCore;
+//using NetDevPack.Security.Jwt.AspNetCore;
 
 namespace eShopEnterprise.Identidade.API.Configuration
 {
@@ -37,7 +38,7 @@ namespace eShopEnterprise.Identidade.API.Configuration
                 endpoints.MapControllers();
             });
 
-            app.UseJwksDiscovery();
+            app.UseJwksDiscovery(); //building blocks\eShopEnterprise.Jwt.AspNetCore\AspNetBuilderExtensions.cs
 
             return app;
         }
