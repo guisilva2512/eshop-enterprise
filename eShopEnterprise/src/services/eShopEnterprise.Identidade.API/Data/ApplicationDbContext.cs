@@ -1,4 +1,5 @@
-﻿using eShopEnterprise.Jwt.Model;
+﻿using eShopEnterprise.Identidade.API.Models;
+using eShopEnterprise.Jwt.Model;
 using eShopEnterprise.Jwt.Store.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,5 +15,6 @@ namespace eShopEnterprise.Identidade.API.Data
         }
 
         public DbSet<SecurityKeyWithPrivate> SecurityKeys { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

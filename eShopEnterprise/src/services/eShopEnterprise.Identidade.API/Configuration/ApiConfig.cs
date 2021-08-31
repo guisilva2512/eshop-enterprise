@@ -1,4 +1,5 @@
-﻿using eShopEnterprise.Jwt.AspNetCore;
+﻿using eShopEnterprise.Identidade.API.Services;
+using eShopEnterprise.Jwt.AspNetCore;
 using eShopEnterprise.WebApi.Core.Identidade;
 using eShopEnterprise.WebApi.Core.Usuario;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +16,7 @@ namespace eShopEnterprise.Identidade.API.Configuration
         {
             services.AddControllers();
 
+            services.AddScoped<AuthenticationService>();
             services.AddScoped<IAspNetUser, AspNetUser>();
 
             return services;
