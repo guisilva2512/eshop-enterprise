@@ -63,7 +63,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopEnterprise.Jwt.AspNetC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopEnterprise.JwtExtensions", "src\building blocks\eShopEnterprise.JwtExtensions\eShopEnterprise.JwtExtensions.csproj", "{CD3C577C-AFA0-4DDF-AF9A-5EA16F57F1D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopEnterprise.Jwt.Store.EntityFrameworkCore", "src\building blocks\eShopEnterprise.Jwt.Store.EntityFrameworkCore\eShopEnterprise.Jwt.Store.EntityFrameworkCore.csproj", "{E5F300F5-00BA-4A34-A7E7-B0DC40900AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopEnterprise.Jwt.Store.EntityFrameworkCore", "src\building blocks\eShopEnterprise.Jwt.Store.EntityFrameworkCore\eShopEnterprise.Jwt.Store.EntityFrameworkCore.csproj", "{E5F300F5-00BA-4A34-A7E7-B0DC40900AE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

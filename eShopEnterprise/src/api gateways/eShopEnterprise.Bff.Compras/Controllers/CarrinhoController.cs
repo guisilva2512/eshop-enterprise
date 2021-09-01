@@ -1,6 +1,8 @@
 ﻿using eShopEnterprise.Bff.Compras.Models;
 using eShopEnterprise.Bff.Compras.Services;
+using eShopEnterprise.Bff.Compras.Services.gRPC;
 using eShopEnterprise.WebApi.Core.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -8,15 +10,18 @@ using System.Threading.Tasks;
 
 namespace eShopEnterprise.Bff.Compras.Controllers
 {
+    [Authorize]
     public class CarrinhoController : MainController
     {
         private readonly ICarrinhoService _carrinhoService;
+        private readonly ICarrinhoGrpcService _carrinhoGrpcService;
         private readonly ICatalogoService _catalogoService;
         private readonly IPedidoService _pedidoService;
 
-        public CarrinhoController(ICarrinhoService carrinhoService, ICatalogoService catalogoService, IPedidoService pedidoService)
+        public CarrinhoController(ICarrinhoService carrinhoService, ICarrinhoGrpcService carrinhoGrpcService, ICatalogoService catalogoService, IPedidoService pedidoService)
         {
             _carrinhoService = carrinhoService;
+            _carrinhoGrpcService = carrinhoGrpcService;
             _catalogoService = catalogoService;
             _pedidoService = pedidoService;
         }
@@ -25,14 +30,16 @@ namespace eShopEnterprise.Bff.Compras.Controllers
         [Route("compras/carrinho")]
         public async Task<IActionResult> Index()
         {
-            return CustomResponse(await _carrinhoService.ObterCarrinho());
+            //return CustomResponse(await _carrinhoService.ObterCarrinho());
+            return CustomResponse(await _carrinhoGrpcService.ObterCarrinho());
         }
 
         [HttpGet]
         [Route("compras/carrinho-quantidade")]
         public async Task<int> ObterQuantidadeCarrinho()
         {
-            var carrinho = await _carrinhoService.ObterCarrinho();
+            //var carrinho = await _carrinhoService.ObterCarrinho();
+            var carrinho = await _carrinhoGrpcService.ObterCarrinho();
             return carrinho?.Itens.Sum(i => i.Quantidade) ?? 0;
         }
 

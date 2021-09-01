@@ -11,10 +11,10 @@ namespace eShopEnterprise.Bff.Compras.Configuration
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("compras", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "eShop Enterprise Compras API",
-                    Description = "Api de compras do grupo eShopEnterprise",
+                    Title = "eShop Compras BFF API",
+                    Description = "BFF Compras do grupo eShopEnterprise",
                     Contact = new OpenApiContact()
                     {
                         Name = "Guilherme Silva",
@@ -61,7 +61,7 @@ namespace eShopEnterprise.Bff.Compras.Configuration
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/compras/swagger.json", "compras");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "compras");
             });
 
             return app;

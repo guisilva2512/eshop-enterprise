@@ -1,4 +1,5 @@
 ﻿using eShopEnterprise.Carrinho.API.Data;
+using eShopEnterprise.Carrinho.API.Services.gRPC;
 using eShopEnterprise.WebApi.Core.Identidade;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +17,8 @@ namespace eShopEnterprise.Carrinho.API.Configuration
             services.AddDbContext<CarrinhoContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
 
             services.AddControllers();
+
+            services.AddGrpc();
 
             services.AddCors(options =>
             {
@@ -45,6 +48,7 @@ namespace eShopEnterprise.Carrinho.API.Configuration
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<CarrinhoGrpcService>().RequireCors("Total");
             });
         }
     }

@@ -10,6 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
+
+    <PackageReference Include="Google.Protobuf" Version="3.12.4" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.30.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.31.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,5 +22,8 @@
     <ProjectReference Include="..\..\building blocks\eShopEnterprise.WebApi.Core\eShopEnterprise.WebApi.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Protobuf Include="..\..\services\eShopEnterprise.Carrinho.API\Protos\carrinho.proto" GrpcServices="Client" />
+  </ItemGroup>
 
 </Project>

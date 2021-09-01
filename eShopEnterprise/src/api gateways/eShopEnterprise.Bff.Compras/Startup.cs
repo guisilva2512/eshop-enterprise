@@ -39,6 +39,8 @@ namespace eShopEnterprise.Bff.Compras
             services.RegisterService();
 
             services.AddMessageBusConfiguration(Configuration);
+
+            services.ConfigureGrpcServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
