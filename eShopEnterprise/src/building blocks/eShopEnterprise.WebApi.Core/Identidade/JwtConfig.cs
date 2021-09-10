@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Http;
 //using NetDevPack.Security.JwtExtensions;
 
 namespace eShopEnterprise.WebApi.Core.Identidade
@@ -26,6 +27,7 @@ namespace eShopEnterprise.WebApi.Core.Identidade
             {
                 bearerOptions.RequireHttpsMetadata = true;
                 bearerOptions.SaveToken = true;
+                bearerOptions.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
                 //bearerOptions.TokenValidationParameters = new TokenValidationParameters
                 //{
                 //    ValidateIssuerSigningKey = true,

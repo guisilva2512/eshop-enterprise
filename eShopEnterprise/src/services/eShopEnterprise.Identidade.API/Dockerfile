@@ -7,10 +7,17 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["src/services/eShopEnterprise.Identidade.API/eShopEnterprise.Identidade.API.csproj", "src/services/eShopEnterprise.Identidade.API/"]
-RUN dotnet restore "src/services/eShopEnterprise.Identidade.API/eShopEnterprise.Identidade.API.csproj"
+COPY ["./services/eShopEnterprise.Identidade.API/eShopEnterprise.Identidade.API.csproj", "services/eShopEnterprise.Identidade.API/"]
+COPY ["./building blocks/eShopEnterprise.Core/eShopEnterprise.Core.csproj", "building blocks/eShopEnterprise.Core/"]
+COPY ["./building blocks/eShopEnterprise.Jwt.AspNetCore/eShopEnterprise.Jwt.AspNetCore.csproj", "building blocks/eShopEnterprise.Jwt.AspNetCore/"]
+COPY ["./building blocks/eShopEnterprise.Jwt.Store.EntityFrameworkCore/eShopEnterprise.Jwt.Store.EntityFrameworkCore.csproj", "building blocks/eShopEnterprise.Jwt.Store.EntityFrameworkCore/"]
+COPY ["./building blocks/eShopEnterprise.Jwt/eShopEnterprise.Jwt.csproj", "building blocks/eShopEnterprise.Jwt/"]
+COPY ["./building blocks/eShopEnterprise.MessageBus/eShopEnterprise.MessageBus.csproj", "building blocks/eShopEnterprise.MessageBus/"]
+COPY ["./building blocks/eShopEnterprise.WebApi.Core/eShopEnterprise.WebApi.Core.csproj", "building blocks/eShopEnterprise.WebApi.Core/"]
+
+RUN dotnet restore "services/eShopEnterprise.Identidade.API/eShopEnterprise.Identidade.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/eShopEnterprise.Identidade.API"
+WORKDIR "services/eShopEnterprise.Identidade.API"
 RUN dotnet build "eShopEnterprise.Identidade.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

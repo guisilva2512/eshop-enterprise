@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbit-eshopenterprise-teste
+    environment:
+      RABBITMQ_DEFAULT_USER: "eshopenterprise"
+      RABBITMQ_DEFAULT_PASS: "eshopenterprise"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+
+  sql-server:
+      image: eshopenterprise/eshopenterprise-sql-server:latest
+      container_name: eshopenterprise-sql-server
+      build:
+        context: ../sql
+        dockerfile: ./Dockerfile
+      ports:
+        - "1433:1433"
+      environment:
+        SA_PASSWORD: "MeuDB@123"
+        ACCEPT_EULA: "Y"
+
+
+  api-identidade:
+    image: eshopenterprise/eshopenterprise-api-identidade:latest
+    container_name: eshopenterprise-api-identidade
+    build:
+      context: ../src
+      dockerfile: ./services/eShopEnterprise.Identidade.API/Dockerfile
+    ports:
+      - "5051:5051"
+      - "5053:5053"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://*:5051
+    depends_on:
+      - rabbitmq
+      - sql-server
+
+  api-catalogo:
+    image: eshopenterprise/eshopenterprise-api-catalogo:latest
+    container_name: eshopenterprise-api-catalogo
+    build:
+      context: ../src
+      dockerfile: ./services/eShopEnterprise.Catalogo.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://*:5000
+    depends_on:
+      - rabbitmq
+      - sql-server

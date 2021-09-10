@@ -1,0 +1,7 @@
+docker-compose -f eshopenterprise_production.yml up --build
+
+192.168.2.107
+eshopenterprise
+
+escalar web-mvc por exemplo: docker-compose -f eshopenterprise_production.yml up --scale web-mvc=4
+-- nesse caso não pode nomear o container
